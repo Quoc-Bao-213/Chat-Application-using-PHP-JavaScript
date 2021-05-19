@@ -6,11 +6,17 @@ searchBtn.onclick = () => {
     searchBar.classList.toggle('show');
     searchBar.focus();
     searchBtn.classList.toggle('active');
+    searchBar.value = "";
+    searchBar.classList.remove('active');
 }
 
 searchBar.onkeyup = () => {
     let searchTerm = searchBar.value;
     
+    if (searchTerm != "") {
+        searchBar.classList.add('active');
+    }
+
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '../../php/search.php', true);
     xhr.onload = () => {
@@ -21,8 +27,8 @@ searchBar.onkeyup = () => {
             }
         }
     }
-
-    xhr.send();
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("searchTerm=" + searchTerm);
 }
 
 setInterval(() => {
@@ -32,7 +38,10 @@ setInterval(() => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 let data = xhr.response;
-                usersList.innerHTML = data;
+                
+                if (!searchBar.classList.contains('active')) { // If active not contains in search bar then add this data
+                    usersList.innerHTML = data;
+                }
             }
         }
     }
