@@ -11,5 +11,6 @@
     } else if (mysqli_num_rows($sql) > 0) {
         include 'data.php';
     }
+    
     echo $output;
 ?>

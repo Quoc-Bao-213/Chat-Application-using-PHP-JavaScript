@@ -6,6 +6,7 @@
     $lastName = mysqli_real_escape_string($connect, $_POST['lname']);
     $email = mysqli_real_escape_string($connect, $_POST['email']);
     $password = mysqli_real_escape_string($connect, $_POST['password']);
+    $password = md5($password);
 
     if (!empty($firstName) && !empty($lastName) &&! empty($email) &&! empty($password)) {
         // Check user email is valid or not

@@ -4,6 +4,7 @@
 
     $email = mysqli_real_escape_string($connect, $_POST['email']);
     $password = mysqli_real_escape_string($connect, $_POST['password']);
+    $password = md5($password);
 
     if (!empty($email) && !empty($password)) {
         // Check users entered email & password matched to database any table row email and password
