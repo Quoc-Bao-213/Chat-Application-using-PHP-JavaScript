@@ -10,7 +10,7 @@
                 LEFT JOIN users on users.unique_id = messages.incoming_msg_id
                 WHERE (outgoing_msg_id = {$outGoingId} AND incoming_msg_id = {$inComingId}) 
                 OR (outgoing_msg_id = {$inComingId} AND incoming_msg_id = {$outGoingId}) 
-                ORDER BY msg_id DESC";
+                ORDER BY msg_id";
         $query = mysqli_query($connect, $sql);
 
         if (mysqli_num_rows($query) > 0) {
