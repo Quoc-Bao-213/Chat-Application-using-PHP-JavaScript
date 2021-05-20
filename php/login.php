@@ -11,8 +11,13 @@
 
         if (mysqli_num_rows($sql) > 0) { // If users credentials matched
             $row = mysqli_fetch_assoc($sql);
-            $_SESSION['unique_id'] = $row['unique_id'];
-            echo "Success";
+            $status = 'Active now';
+            $sql2 = mysqli_query($connect, "UPDATE users SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
+           
+            if ($sql2) {
+                $_SESSION['unique_id'] = $row['unique_id'];
+                echo "Success";
+            }
         } else {
             echo "Email or Password is incorrect!";
         }
